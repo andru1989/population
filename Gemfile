@@ -47,4 +47,6 @@ group :development, :test do
   gem 'meta_request'
 end
 
+gem 'simple_form'
+
 
