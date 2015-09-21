@@ -1,0 +1,11 @@
+<% if model.errors.any? %>
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong><%=  t('errors.template.header', model: model.class, count: model.errors.count)%></strong>
+    <ul>
+      <% model.errors.full_messages.each do |msg| %>
+        <li><%= msg.html_safe %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
