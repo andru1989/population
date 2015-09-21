@@ -8,7 +8,7 @@ class CreatePeople < ActiveRecord::Migration
       t.string :address
       t.integer :gender
       t.string :phone
-      t.references :city, index: true, foreign_key: true
+      t.references :city, index: true
 
       t.timestamps null: false
     end
