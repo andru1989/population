@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :cities
-  resources :regions
+  resources :regions do
+    resources :cities
+  end
+
   resources :people
 
   root 'pages#home'
