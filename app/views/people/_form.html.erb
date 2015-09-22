@@ -5,7 +5,7 @@
 
     <div class="row">
       <div class="col-sm-4 btn-lg-3">
-        <%= f.input :identification_type %>
+        <%= f.input :identification_type, collection: @person.select_identification_types %>
       </div>
 
       <div class="col-sm-4 btn-lg-3">
@@ -21,7 +21,7 @@
       </div>
 
       <div class="col-sm-4 btn-lg-3">
-        <%= f.input :gender %>
+        <%= f.input :gender, collection: @person.select_genders %>
       </div>
 
       <div class="col-sm-4 btn-lg-3">
