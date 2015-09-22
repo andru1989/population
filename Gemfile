@@ -45,6 +45,18 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
+
+  gem "rspec-rails"
+  gem "factory_girl_rails"
+end
+
+group :test do
+  gem "faker", "~> 1.4.3"
+  gem "capybara"
+  gem "database_cleaner", "~> 1.3.0"
+  gem "launchy", "~> 2.4.2"
+  gem "selenium-webdriver", "~> 2.43.0"
+  gem 'simplecov', require: false
 end
 
 gem 'simple_form'
