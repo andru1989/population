@@ -1,15 +1,11 @@
 class CitiesController < ApplicationController
   before_action :set_city, only: [:show, :edit, :update, :destroy]
+  before_action :find_region
 
   # GET /cities
   # GET /cities.json
   def index
-    @cities = City.all
-  end
-
-  # GET /cities/1
-  # GET /cities/1.json
-  def show
+    @cities = @region.cities.all
   end
 
   # GET /cities/new
@@ -24,11 +20,11 @@ class CitiesController < ApplicationController
   # POST /cities
   # POST /cities.json
   def create
-    @city = City.new(city_params)
+    @city = @region.cities.build(city_params)
 
     respond_to do |format|
       if @city.save
-        format.html { redirect_to @city, notice: 'City was successfully created.' }
+        format.html { redirect_to region_cities_path(@region), notice: 'City was successfully created.' }
         format.json { render :show, status: :created, location: @city }
       else
         format.html { render :new }
@@ -42,7 +38,7 @@ class CitiesController < ApplicationController
   def update
     respond_to do |format|
       if @city.update(city_params)
-        format.html { redirect_to @city, notice: 'City was successfully updated.' }
+        format.html { redirect_to region_cities_path(@region), notice: 'City was successfully updated.' }
         format.json { render :show, status: :ok, location: @city }
       else
         format.html { render :edit }
@@ -56,12 +52,16 @@ class CitiesController < ApplicationController
   def destroy
     @city.destroy
     respond_to do |format|
-      format.html { redirect_to cities_url, notice: 'City was successfully destroyed.' }
+      format.html { redirect_to region_cities_path(@region), notice: 'City was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
+    def find_region
+      @region = Region.find(params[:region_id]) if params[:region_id]
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_city
       @city = City.find(params[:id])
@@ -69,6 +69,6 @@ class CitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def city_params
-      params.require(:city).permit(:name, :region_id)
+      params.require(:city).permit(:name)
     end
 end
