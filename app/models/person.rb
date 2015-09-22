@@ -2,7 +2,7 @@ class Person < ActiveRecord::Base
   belongs_to :city
 
   validates :identification_type, presence: true
-  validates :identification,      presence: true
+  validates :identification,      presence: true, uniqueness: {case_sensitive: false}
   validates :name,                presence: true
   validates :last_name,           presence: true
   validates :city_id,             presence: true
