@@ -1,12 +1,21 @@
-<%= simple_form_for(@city) do |f| %>
-  <%= f.error_notification %>
+<%= simple_form_for([@region, @city], defaults: {error: false}) do |f| %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.association :region %>
+  <div class="panel-body">
+    <%= render "shared/error_message", model: @city %>
+
+    <div class="row">
+      <div class="col-sm-4 btn-lg-3">
+        <%= f.input :name %>
+      </div>
+    </div>
+
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="panel-footer">
+    <div class="btn-group btn-group-sm">
+      <%= f.button :submit, class: 'btn btn-primary' %>
+      <%= link_to 'Back', region_cities_path(@region), class: 'btn btn-default' %>
+    </div>
   </div>
+
 <% end %>
