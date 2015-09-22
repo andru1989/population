@@ -11,6 +11,7 @@ class Person < ActiveRecord::Base
   enum gender: [:male, :female]
 
   def full_name
-    [name, last_name].join(' ')
+    ActiveDecorator::Decorator.instance.decorate(self).full_name
   end
+
 end
