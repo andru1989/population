@@ -24,4 +24,20 @@ feature 'Region creation' do
     expect(page).to have_content 'Name has already been taken'
   end
 
+  scenario 'edits a region' do
+    create(:region)
+    update_region
+
+    expect(current_path).to eq regions_path
+    expect(page).to have_content 'Region was successfully updated.'
+  end
+
+  scenario 'destroy a region' do
+    create(:region)
+    expect{ destroy_region }.to change(Region, :count).by(-1)
+
+    expect(current_path).to eq regions_path
+    expect(page).to have_content 'Region was successfully destroyed.'
+  end
+
 end
