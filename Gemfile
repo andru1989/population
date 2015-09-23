@@ -57,6 +57,7 @@ group :test do
   gem "launchy", "~> 2.4.2"
   gem "selenium-webdriver", "~> 2.43.0"
   gem 'simplecov', require: false
+  gem 'shoulda-matchers', require: false
 end
 
 gem 'simple_form'
