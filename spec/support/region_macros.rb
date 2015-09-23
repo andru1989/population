@@ -4,22 +4,12 @@ module RegionMacros
     navigate_regions_index
     click_link 'New Region'
 
-    fill_in 'Name', with: region.name
+    fill_fields(region)
     click_button 'Create Region'
   end
 
-  def update_region(region = build(:region))
-    navigate_regions_index
-    click_link('Edit', match: :first)
-
+  def fill_fields(region)
     fill_in 'Name', with: region.name
-
-    click_button 'Update Region'
-  end
-
-  def destroy_region
-    navigate_regions_index
-    click_link('Destroy', match: :first)
   end
 
   def navigate_regions_index
