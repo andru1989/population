@@ -25,8 +25,12 @@ feature 'Region creation' do
   end
 
   scenario 'edits a region' do
-    create(:region)
-    update_region
+    region = create(:region)
+    navigate_regions_index
+    click_link('Edit', match: :first)
+    fill_fields(region)
+
+    click_button 'Update Region'
 
     expect(current_path).to eq regions_path
     expect(page).to have_content 'Region was successfully updated.'
@@ -34,7 +38,10 @@ feature 'Region creation' do
 
   scenario 'destroy a region' do
     create(:region)
-    expect{ destroy_region }.to change(Region, :count).by(-1)
+    expect{
+      navigate_regions_index
+      click_link('Destroy', match: :first)
+    }.to change(Region, :count).by(-1)
 
     expect(current_path).to eq regions_path
     expect(page).to have_content 'Region was successfully destroyed.'
