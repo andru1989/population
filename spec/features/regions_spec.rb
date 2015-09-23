@@ -17,10 +17,11 @@ feature 'Region creation' do
   scenario 'try to add a duplicate region' do
     region = build(:region, name: 'Antioquia')
 
-    expect( create_region(region) )
-    expect( create_region(region) )
-    expect(page).to have_content 'Name has already been taken'
+    2.times do
+      expect( create_region(region) )
+    end
 
+    expect(page).to have_content 'Name has already been taken'
   end
 
 end
