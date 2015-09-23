@@ -62,5 +62,4 @@ RSpec.configure do |config|
 
   config.include RegionMacros
   config.include PersonMacros
-  config.include CityMacros
 end
