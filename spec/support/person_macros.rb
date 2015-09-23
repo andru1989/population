@@ -1,5 +1,14 @@
 module PersonMacros
 
+  def create_person(person = build(:person))
+    visit people_path
+    click_link 'New Person'
+
+    fill_fields(person)
+
+    click_button 'Create Person'
+  end
+
   def fill_fields(person)
     find("#person_identification_type option[value=#{person.identification_type}]").select_option
     fill_in 'Identification', with: person.identification
