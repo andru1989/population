@@ -1,44 +1,40 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <b>Person Information</b>
+  </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @person.name %>
-</p>
+  <table class="table table-condensed table-bordered">
+    <tr>
+      <td>
+        <b>Identification Type: </b><%= @person.identification_type.humanize %>
+      </td>
+      <td>
+        <b>Identification: </b><%= @person.identification %>
+      </td>
+      <td>
+        <b>Name: </b><%= @person.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Last name: </b><%= @person.last_name %>
+      </td>
+      <td>
+        <b>Gender: </b><%= @person.gender %>
+      </td>
+      <td>
+        <b>Phone: </b><%= @person.phone %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Address: </b><%= @person.address %>
+      </td>
+      <td>
+        <b>City: </b><%= @person.city.city_region %>
+      </td>
+    </tr>
+  </table>
+</div>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @person.last_name %>
-</p>
-
-<p>
-  <strong>Identification type:</strong>
-  <%= @person.identification_type %>
-</p>
-
-<p>
-  <strong>Identification:</strong>
-  <%= @person.identification %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @person.address %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @person.gender %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @person.phone %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @person.city %>
-</p>
-
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Back', people_path %>
+<%= link_to 'Back', people_path, class: 'btn btn-default btn-sm' %>

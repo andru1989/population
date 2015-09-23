@@ -1,41 +1,40 @@
-<p id="notice"><%= notice %></p>
+<div class="panel-default">
+  <div class="panel-heading">
+    <b>Listing people</b>
+  </div>
 
-<h1>Listing People</h1>
+  <div class="table-responsive">
+    <table class="table table-condensed table-bordered">
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Identification</th>
+          <th>Gender</th>
+          <th>City</th>
+          <th>Options</th>
+        </tr>
+      </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Last name</th>
-      <th>Identification type</th>
-      <th>Identification</th>
-      <th>Address</th>
-      <th>Gender</th>
-      <th>Phone</th>
-      <th>City</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <tbody>
+        <% @people.each do |person| %>
+          <tr>
+            <td><%= person.full_name %></td>
+            <td><%= person.identification %></td>
+            <td><%= person.gender %></td>
+            <td><%= person.city.name %></td>
+            <td>
+              <div class="btn-group btn-group-xs">
+                <%= link_to 'Show', person, class: 'btn btn-default' %>
+                <%= link_to 'Edit', edit_person_path(person), class: 'btn btn-default' %>
+                <%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' },
+                  class: 'btn btn-danger' %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-  <tbody>
-    <% @people.each do |person| %>
-      <tr>
-        <td><%= person.name %></td>
-        <td><%= person.last_name %></td>
-        <td><%= person.identification_type %></td>
-        <td><%= person.identification %></td>
-        <td><%= person.address %></td>
-        <td><%= person.gender %></td>
-        <td><%= person.phone %></td>
-        <td><%= person.city %></td>
-        <td><%= link_to 'Show', person %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Person', new_person_path %>
+<%= link_to 'New Person', new_person_path, class: 'btn btn-primary btn-sm' %>
