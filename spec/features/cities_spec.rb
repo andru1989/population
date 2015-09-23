@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'City creation' do
+feature 'City' do
 
   scenario 'adds a new city' do
     region = create(:region)
@@ -23,12 +23,36 @@ feature 'City creation' do
 
     create_region(region)
     2.times do
-      expect{
-        create_city(city)
-      }
+      expect{ create_city(city) }
     end
 
     expect(page).to have_content 'Name has already been taken'
+  end
+
+  scenario 'edits a city' do
+    region  = create(:region)
+    city    = create(:city, region_id: region.id)
+
+    expect(update_city)
+    expect(current_path).to eq region_cities_path(region)
+    expect(page).to have_content 'City was successfully updated.'
+
+    within 'b' do
+      expect(page).to have_content 'Listing cities'
+    end
+  end
+
+  scenario 'destroy a city' do
+    region  = create(:region)
+    city    = create(:city, region_id: region.id)
+
+    expect{ destroy_city }.to change(City, :count).by(-1)
+    expect(current_path).to eq region_cities_path(region)
+    expect(page).to have_content 'City was successfully destroyed.'
+
+    within 'b' do
+      expect(page).to have_content 'Listing cities'
+    end
   end
 
 end
