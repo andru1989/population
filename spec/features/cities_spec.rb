@@ -3,10 +3,10 @@ require 'rails_helper'
 feature 'City' do
 
   scenario 'adds a new city' do
-    region = create(:region)
+    region  = create(:region)
+    city    = build(:city, region_id: region.id)
     expect{
-      create_region(region)
-      create_city
+      create_city(city)
     }.to change(City, :count).by(1)
 
     expect(current_path).to eq region_cities_path(region)
@@ -33,7 +33,10 @@ feature 'City' do
     region  = create(:region)
     city    = create(:city, region_id: region.id)
 
-    expect(update_city)
+    navigate_cities_index
+    click_link('Edit', match: :first)
+    fill_in 'Name', with: city.name
+    click_button 'Update City'
     expect(current_path).to eq region_cities_path(region)
     expect(page).to have_content 'City was successfully updated.'
 
@@ -46,7 +49,10 @@ feature 'City' do
     region  = create(:region)
     city    = create(:city, region_id: region.id)
 
-    expect{ destroy_city }.to change(City, :count).by(-1)
+    expect{
+      navigate_cities_index
+      click_link('Destroy', match: :first)
+    }.to change(City, :count).by(-1)
     expect(current_path).to eq region_cities_path(region)
     expect(page).to have_content 'City was successfully destroyed.'
 
