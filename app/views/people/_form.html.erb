@@ -4,36 +4,54 @@
     <%= render "shared/error_message", model: @person %>
 
     <div class="row">
-      <div class="col-sm-4 btn-lg-3">
+      <div class="col-sm-4 col-lg-3">
         <%= f.input :identification_type, collection: @person.select_identification_types %>
       </div>
 
-      <div class="col-sm-4 btn-lg-3">
+      <div class="col-sm-4 col-lg-3">
         <%= f.input :identification %>
       </div>
 
-      <div class="col-sm-4 btn-lg-3">
+      <div class="col-sm-4 col-lg-3">
         <%= f.input :name %>
       </div>
 
-      <div class="col-sm-4 btn-lg-3">
+      <div class="col-sm-4 col-lg-3">
         <%= f.input :last_name %>
       </div>
 
-      <div class="col-sm-4 btn-lg-3">
+      <div class="col-sm-4 col-lg-3">
         <%= f.input :gender, collection: @person.select_genders %>
       </div>
 
-      <div class="col-sm-4 btn-lg-3">
+      <div class="col-sm-4 col-lg-3">
         <%= f.input :phone %>
       </div>
 
-      <div class="col-sm-4 btn-lg-3">
+      <div class="col-sm-4 col-lg-3">
         <%= f.input :address %>
       </div>
 
-      <div class="col-sm-4 btn-lg-3">
+      <div class="col-sm-4 col-lg-3">
         <%= f.association :city, label_method: :city_region %>
+      </div>
+    </div>
+
+    <div class="page-header">
+      <h4>Work Experience</h4>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4 col-lg-3">
+        <%= f.input :company %>
+      </div>
+
+      <div class="col-sm-4 col-lg-3">
+        <%= f.input :office %>
+      </div>
+
+      <div class="col-sm-4 col-lg-3">
+        <%= f.input :description %>
       </div>
     </div>
 
