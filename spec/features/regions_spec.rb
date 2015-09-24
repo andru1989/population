@@ -18,7 +18,7 @@ feature 'Region creation' do
     region = build(:region, name: 'Antioquia')
 
     2.times do
-      expect( create_region(region) )
+      create_region(region)
     end
 
     expect(page).to have_content 'Name has already been taken'
