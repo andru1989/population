@@ -14,7 +14,7 @@ feature 'Person' do
     person = build(:person, identification: '10373737')
 
     2.times do
-      expect(create_person(person))
+      create_person(person)
     end
 
     expect(page).to have_content 'Identification has already been taken'
