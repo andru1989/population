@@ -1,4 +1,7 @@
 class Person < ActiveRecord::Base
+
+  store_accessor :work_experience, :company, :office, :description
+
   belongs_to :city
 
   validates :identification_type, presence: true
