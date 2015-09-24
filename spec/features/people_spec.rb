@@ -25,7 +25,7 @@ feature 'Person' do
     visit people_path
     click_link("Edit", match: :first)
 
-    fill_fields(person)
+    fill_person_form_fields(person)
 
     click_button 'Update Person'
 
