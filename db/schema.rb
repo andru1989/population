@@ -11,39 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150921180509) do
+ActiveRecord::Schema.define(version: 20150924052812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cities", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.integer  "region_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "cities", ["name"], name: "index_cities_on_name", unique: true, using: :btree
   add_index "cities", ["region_id"], name: "index_cities_on_region_id", using: :btree
 
   create_table "people", force: :cascade do |t|
-    t.string   "name"
-    t.string   "last_name"
-    t.integer  "identification_type"
-    t.string   "identification"
+    t.string   "name",                null: false
+    t.string   "last_name",           null: false
+    t.integer  "identification_type", null: false
+    t.string   "identification",      null: false
     t.string   "address"
     t.integer  "gender"
     t.string   "phone"
-    t.integer  "city_id"
+    t.integer  "city_id",             null: false
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end
 
   add_index "people", ["city_id"], name: "index_people_on_city_id", using: :btree
+  add_index "people", ["identification"], name: "index_people_on_identification", unique: true, using: :btree
 
   create_table "regions", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "regions", ["name"], name: "index_regions_on_name", unique: true, using: :btree
 
 end
