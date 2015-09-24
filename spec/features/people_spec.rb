@@ -10,9 +10,24 @@ feature 'Person' do
 
   end
 
+  scenario 'try to add a person with a duplicate identification' do
+    person = build(:person, identification: '10373737')
+
+    2.times do
+      create_person(person)
+    end
+
+    expect(page).to have_content 'Identification has already been taken'
+  end
+
   scenario 'edits a person' do
-    create(:person)
-    update_person
+    person = create(:person)
+    visit people_path
+    click_link("Edit", match: :first)
+
+    fill_person_form_fields(person)
+
+    click_button 'Update Person'
 
     expect(current_path).to eq people_path
     expect(page).to have_content 'Person was successfully updated.'
@@ -20,7 +35,10 @@ feature 'Person' do
 
   scenario 'destroy a person' do
     create(:person)
-    expect{ destroy_person }.to change(Person, :count).by(-1)
+    expect{
+      visit people_path
+      click_link("Destroy", match: :first)
+    }.to change(Person, :count).by(-1)
 
     expect(current_path).to eq people_path
     expect(page).to have_content 'Person was successfully destroyed.'
