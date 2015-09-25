@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150924052812) do
+ActiveRecord::Schema.define(version: 20150924200313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "cities", force: :cascade do |t|
     t.string   "name",       null: false
@@ -37,10 +38,12 @@ ActiveRecord::Schema.define(version: 20150924052812) do
     t.integer  "city_id",             null: false
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.hstore   "work_experience"
   end
 
   add_index "people", ["city_id"], name: "index_people_on_city_id", using: :btree
   add_index "people", ["identification"], name: "index_people_on_identification", unique: true, using: :btree
+  add_index "people", ["work_experience"], name: "index_people_on_work_experience", using: :gin
 
   create_table "regions", force: :cascade do |t|
     t.string   "name",       null: false
